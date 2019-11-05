@@ -1,7 +1,7 @@
 hold on
 ########### params ########
-iter = 10
-x0=+0.00043;
+iter = 200
+x0=-1*10^-10;
 function ret = riv(x)
     ret = 4*x*(1+x);
 end;
@@ -18,8 +18,6 @@ x_next = riv(x_vec(iter));
 x_vec1(iter) = x_next;
 #### Lamerey diagram ####
 bis_vec = [0, x_vec(iter)];
-plot(bis_vec);
-drawnow();
 x_vec_plot  = zeros(iter * 2 - 1, 1);
 x_vec1_plot  = zeros(iter * 2 - 1, 1);
 for i=1:iter*2-1
@@ -31,9 +29,19 @@ for i=1:iter*2-1
         x_vec1_plot(i) = x_vec1_plot(i-1);
     endif
 end
+xlast = x_vec(1);
+for i=1:iter-1
+    #plot(x_vec(i), x_vec(i+1));
+    plot([x_vec(i) x_vec(i)], [x_vec(i) x_vec(i+1)]);
+    plot([x_vec(i) xlast], [x_vec(i) x_vec(i)]);
+    xlast = x_vec(i);
+    drawnow();
+end
 # plot vectors
 #plot(x_vec, x_vec1, '--', x_vec_plot, x_vec1_plot, '-', bis_vec, bis_vec);
 
+#plot(bis_vec);
+#drawnow();
 disp(x_vec);
 disp(x_vec1);
 disp(x_vec_plot);
