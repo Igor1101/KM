@@ -14,7 +14,7 @@ for i=1:(iter-1)
     x_vec1(i) = nxt;
     x_vec(i+1) = nxt;
 end;
-x_next = riv(iter);
+x_next = riv(x_vec(iter));
 x_vec1(iter) = x_next;
 #### Lamerey diagram ####
 bis_vec = [0, x_vec(iter)];
